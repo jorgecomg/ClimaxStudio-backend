@@ -24,16 +24,17 @@ endpoints.post('/evento', async (req, resp) => {
 
 endpoints.get('/evento', async (req, resp) => {
     try {
-
         let registros = await consultarEventosService();
+        
 
+        registros.pop(); 
+        
         resp.send(registros);
-
     } catch (error) {
         logErro(error);
-        resp.status(400).send(criarErro(error))
+        resp.status(400).send(criarErro(error));
     }
-})
+});
 
 endpoints.delete('/evento/:id', async (req, resp) => {
     try {

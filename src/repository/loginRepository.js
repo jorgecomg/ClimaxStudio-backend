@@ -7,5 +7,5 @@ export async function consultarLogin(usuario) {
 
     let resposta = await con.query(comando, [usuario.email, usuario.senha]);
     
-    return resposta;
+    return resposta[0];
 }
