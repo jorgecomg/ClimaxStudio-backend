@@ -3,7 +3,7 @@ const endpoints = Router();
 
 import salvarEventoService from "../service/evento/salvarEventoService.js";
 import consultarEventosService from "../service/evento/consultarEventosService.js";
-
+import deletarEventosService from "../service/evento/deletarEventoService.js";
 
 endpoints.post('/evento', async (req, resp) => {
     try {
@@ -28,6 +28,21 @@ endpoints.get('/evento', async (req, resp) => {
         let registros = await consultarEventosService();
 
         resp.send(registros);
+
+    } catch (error) {
+        logErro(error);
+        resp.status(400).send(criarErro(error))
+    }
+})
+
+endpoints.delete('/evento/:id', async (req, resp) => {
+    try {
+
+        let id = req.params.id; 
+
+       await deletarEventosService(id);
+
+       resp.status(204).send();
 
     } catch (error) {
         logErro(error);

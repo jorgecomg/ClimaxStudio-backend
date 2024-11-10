@@ -22,3 +22,14 @@ export async function consultarEventos() {
     
     return resposta;
 }
+
+export async function deletarEventos(id) {
+    let comando = `
+    DELETE FROM eventos WHERE id = ?
+    `
+
+    let resposta = await con.query(comando, [id])
+    let info = resposta[0];
+    let linhasAfetadas = info.affectedRows;
+    return linhasAfetadas;
+}
